@@ -49,15 +49,15 @@ order-streaming/
 
 ## Key Design Choices
 
-- **Avro via Schema Registry** — schema auto-registers on first produce (subject
+- **Avro via Schema Registry** : schema auto-registers on first produce (subject
   `orders-value`); messages use the Confluent wire format.
-- **Transient vs. permanent failures** — transient (e.g. timeout) is retried;
+- **Transient vs. permanent failures** : transient (e.g. timeout) is retried;
   permanent (e.g. invalid data) goes straight to the DLQ. No wasted retries.
-- **Exponential backoff** — 3 retries at `0.5s → 1s → 2s`.
-- **Manual offset commits** (`enable.auto.commit=false`) — commit only after a
+- **Exponential backoff** : 3 retries at `0.5s → 1s → 2s`.
+- **Manual offset commits** (`enable.auto.commit=false`) : commit only after a
   message is processed or DLQ'd, giving at-least-once semantics.
 - **DLQ payload is JSON** with error type, original topic/partition/offset, and the
-  raw bytes as hex — useful for debugging and replay.
+  raw bytes as hex, useful for debugging and replay.
 
 ---
 
