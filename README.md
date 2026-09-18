@@ -1,4 +1,3 @@
-# kafka-avro-order-pipeline
 # Kafka Avro Order Pipeline
 
 A Kafka system that produces and consumes **order messages** using **Avro
